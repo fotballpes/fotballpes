@@ -1,0 +1,475 @@
+/* ========================================
+   GLOBAL RESET
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+body {
+    background: #f0f2f5;
+    min-height: 100vh;
+    color: #111827;
+    padding: 20px 0;
+}
+
+/* ========================================
+   CONTAINER
+   ======================================== */
+.container {
+    background: #ffffff;
+    border-radius: 16px;
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.container.login-container {
+    padding: 35px 30px;
+    margin: 80px auto;
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.konami-logo {
+    font-size: 15px;
+    font-weight: 900;
+    color: #e60012;
+    letter-spacing: 1.5px;
+    font-family: 'Arial Black', sans-serif;
+}
+
+.efootball-logo {
+    font-size: 13px;
+    font-weight: bold;
+    color: #0066ff;
+}
+
+/* ========================================
+   HERO
+   ======================================== */
+.hero {
+    background: linear-gradient(135deg, #0066ff 0%, #00a8ff 100%);
+    padding: 30px 25px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.hero h1 {
+    font-size: 22px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* ========================================
+   SECTION TITLE
+   ======================================== */
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 25px 10px;
+}
+
+.section-title h2 {
+    font-size: 16px;
+    color: #111827;
+    font-weight: 700;
+}
+
+.title-icon {
+    font-size: 20px;
+}
+
+/* ========================================
+   OFFERS — GRID
+   ======================================== */
+.offers {
+    padding: 15px 25px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.offer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #f5f3ff;
+    border: 2px solid #8b5cf6;
+    border-radius: 16px;
+    padding: 20px 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    gap: 8px;
+}
+
+.offer:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
+}
+
+.offer.popular {
+    border-color: #ffa500;
+    background: #fffbf0;
+}
+
+.offer.best {
+    border-color: #22c55e;
+    background: #f0fdf4;
+}
+
+.offer-icon {
+    font-size: 40px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.offer-content {
+    width: 100%;
+    flex: 1;
+}
+
+.offer-content h3 {
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #111827;
+    font-weight: 700;
+}
+
+.offer-content p {
+    font-size: 10px;
+    color: #6b7280;
+    margin-bottom: 6px;
+    line-height: 1.3;
+    min-height: 26px;
+}
+
+.offer-badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 10px;
+    background: #ede9fe;
+    color: #7c3aed;
+    white-space: nowrap;
+}
+
+.offer-coins {
+    font-size: 13px;
+    font-weight: bold;
+    background: #ffffff;
+    padding: 6px 12px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    color: #111827;
+    white-space: nowrap;
+}
+
+.popular-badge,
+.best-badge {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 10px;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.popular-badge {
+    background: #ffa500;
+}
+
+.best-badge {
+    background: #22c55e;
+}
+
+/* ========================================
+   CTA
+   ======================================== */
+.cta-section {
+    padding: 20px 25px 25px;
+    text-align: center;
+}
+
+.cta-text {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 15px;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #0066ff, #00a8ff);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3);
+}
+
+.btn-arrow {
+    font-size: 16px;
+}
+
+/* ========================================
+   LOGIN / OTP
+   ======================================== */
+h1 {
+    color: #111827;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #6b7280;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    color: #374151;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 13px 15px;
+    background: #f9fafb;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    color: #111827;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #0066ff;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.1);
+}
+
+.email-info {
+    background: #eef4ff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.email-info p {
+    color: #6b7280;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.email-info strong {
+    color: #0066ff;
+    font-size: 14px;
+}
+
+.otp-inputs {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.otp-digit {
+    width: 48px;
+    height: 56px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    background: #f9fafb;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    color: #111827;
+    transition: all 0.3s;
+}
+
+.otp-digit:focus {
+    outline: none;
+    border-color: #0066ff;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.1);
+}
+
+/* ========================================
+   SUCCESS
+   ======================================== */
+.success-container {
+    text-align: center;
+    padding: 40px 30px;
+}
+
+.checkmark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: #ffffff;
+    font-size: 45px;
+    animation: bounceIn 0.8s ease;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.success-container h1 {
+    color: #22c55e;
+    margin-bottom: 10px;
+}
+
+.success-container p {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.info-box {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: right;
+    border: 1px solid #e5e7eb;
+}
+
+.info-box p {
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: #111827;
+}
+
+.info-box strong {
+    color: #0066ff;
+}
+
+/* ========================================
+   ERROR
+   ======================================== */
+.error {
+    color: #ef4444;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 15px;
+    min-height: 20px;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.footer {
+    text-align: center;
+    padding: 20px 25px;
+    background: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+}
+
+.footer p {
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 480px) {
+    body { padding: 0; }
+    
+    .container {
+        border-radius: 0;
+        max-width: 100%;
+        min-height: 100vh;
+    }
+    
+    .container.login-container {
+        border-radius: 0;
+        margin: 0;
+        min-height: 100vh;
+    }
+    
+    .offers {
+        padding: 12px 18px;
+        gap: 10px;
+    }
+    
+    .offer {
+        padding: 16px 10px;
+    }
+    
+    .offer-icon {
+        font-size: 34px;
+        height: 44px;
+    }
+    
+    .offer-content h3 { font-size: 13px; }
+    .offer-content p { font-size: 9px; min-height: 22px; }
+    .offer-coins { font-size: 11px; padding: 5px 8px; }
+    .offer-badge { font-size: 8px; padding: 2px 6px; }
+    
+    .otp-digit {
+        width: 42px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
